@@ -7,7 +7,9 @@ public class TypeC extends Thing {
         super(row, col, 'c');
     }
 
-    /** TypeC never turns, just keeps moving straight. */
+    /** 
+     * TypeC never turns, just keeps moving straight. 
+    */
     @Override
     public void maybeTurn(Random rand) {
     }

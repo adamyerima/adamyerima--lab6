@@ -2,14 +2,13 @@ import java.util.Random;
 
 /**
  * Driver
- * Creates and manages a ThingList of moving TypeA and TypeB Things.
+ * Spawns TypeA and TypeB Things, moves them, and prints for plotting.
  */
 public class DotChaser {
     public static void main(String[] args) {
         Random rand = new Random(System.currentTimeMillis());
-        int N = 200;
+        int N = 200; // how often to spawn new Things
 
-        // Control how often new Things appear.
         if (args.length != 0)
             N = Integer.parseInt(args[0]);
 
@@ -18,17 +17,18 @@ public class DotChaser {
 
         // Infinite simulation loop
         while (true) {
-            // Every N rounds, add a new TypeA and TypeB Thing
+            // Spawn a new TypeA and TypeB every N rounds
             if (count % N == 0) {
                 list.addThing(new TypeA(45, 50));
                 list.addThing(new TypeB(55, 50));
             }
 
-            // Print the current positions of all Things
+            // Print all Things (for Plotter)
             list.printAll();
 
-            // Move every Thing according to its type’s behavior
+            // Move all Things according to their type behavior
             list.moveAll(rand);
+
             count++;
         }
     }

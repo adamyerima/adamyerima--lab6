@@ -1,45 +1,48 @@
 import java.util.Random;
 
 /**
- * Linked list class to hold and manage multiple Thing objects.
- * Provides methods to add, move, and print all Things in the list.
+ * Linked list to store all Things in the simulation.
+ * Provides methods to add Things, move them, and print their positions.
  */
 public class ThingList {
+    private Node head; // first node of the linked list
 
     /**
-     * Inner Node class for the singly linked list.
-     * Each node stores a Thing and a reference to the next Node.
+     * Node class: each Node stores a Thing and a reference to the next Node
      */
     private class Node {
         Thing data;
         Node next;
     }
 
-    // Reference to the first node in the list.
-    private Node head;
-
-    /** Adds a new Thing to the front of the list. */
+    /**
+     * Add a Thing to the front of the list
+     */
     public void addThing(Thing t) {
         Node n = new Node();
         n.data = t;
-        n.next = head;
-        head = n;
+        n.next = head; // link new node to current head
+        head = n;      // update head to new node
     }
 
-    /** Prints all Things in the list followed by "done". */
-    public void printAll() {
-        for (Node curr = head; curr != null; curr = curr.next) {
-            System.out.println(curr.data);
-        }
-        System.out.println("done");
-        System.out.flush();
-    }
-
-    /** Updates all Things in the list by calling maybeTurn() and step(). */
+    /**
+     * Move all Things by calling maybeTurn and step
+     */
     public void moveAll(Random rand) {
-        for (Node curr = head; curr != null; curr = curr.next) {
-            curr.data.maybeTurn(rand);
-            curr.data.step();
+        for (Node cur = head; cur != null; cur = cur.next) {
+            cur.data.maybeTurn(rand); // decide on turning
+            cur.data.step();           // move forward
         }
+    }
+
+    /**
+     * Print positions of all Things to stdout for Plotter
+     */
+    public void printAll() {
+        for (Node cur = head; cur != null; cur = cur.next) {
+            System.out.println(cur.data.toString());
+        }
+        System.out.println("done"); // end of this frame
+        System.out.flush();
     }
 }

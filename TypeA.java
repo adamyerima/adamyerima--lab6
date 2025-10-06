@@ -1,24 +1,24 @@
 import java.util.Random;
 
 /**
- * TypeA Things turn randomly every round.
- * They decide each time step whether to turn right, left, or not at all.
+ * TypeA moves by randomly deciding to turn left or right **every round**.
  */
 public class TypeA extends Thing {
 
-    // TypeA constructor sets its label to 'r' (for "red" or "regular").
-    public TypeA(int row, int col) {
-        super(row, col, 'r');
+    /**
+     * Constructor: initialize position and label
+     */
+    public TypeA(int r, int c) {
+        super(r, c, 'r'); // label 'r' for TypeA
     }
 
-    /** Randomly decides whether to turn left, right, or continue straight. */
+    /**
+     * Decide to turn left or right this round.
+     */
     @Override
     public void maybeTurn(Random rand) {
-        int i = rand.nextInt(3); // 0 = no turn, 1 = right, 2 = left
-        if (i == 1) {
-            rightTurn();
-        } else if (i == 2) {
-            leftTurn();
-        }
+        int i = rand.nextInt(3); // 0=no turn, 1=right, 2=left
+        if (i == 1) rightTurn();
+        else if (i == 2) leftTurn();
     }
 }
